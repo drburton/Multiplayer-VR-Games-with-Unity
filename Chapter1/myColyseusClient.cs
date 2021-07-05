@@ -21,12 +21,11 @@ class MoveData
 	public float xRot;
 	public float yRot;
 	public float zRot;
-	public string name;
 }
 
 public class myColyseusClient : ColyseusManager<myColyseusClient> {
 
-	public String PlayerName, SessionId;
+	public String SessionId;
 	public String roomName;
 	
 	public GameObject Spawn;
@@ -80,8 +79,7 @@ public class myColyseusClient : ColyseusManager<myColyseusClient> {
 		zPos = myPlayer.transform.position.z,
 		xRot = myPlayer.transform.rotation.x,
 		yRot = myPlayer.transform.rotation.y,
-		zRot = myPlayer.transform.rotation.z,
-		name = PlayerName
+		zRot = myPlayer.transform.rotation.z
 	  });  
 	}
 
@@ -121,13 +119,13 @@ public class myColyseusClient : ColyseusManager<myColyseusClient> {
 
             // Add "enemy" to map of players
             entities.Add(entity, myEnemy);
-			myEnemy.GetComponentInChildren<TextMesh>().text = entity.ownerId;
+			
             entity.OnChange += (List<Colyseus.Schema.DataChange> changes) =>
             {
                 myEnemy.transform.position = new Vector3(entity.xPos, 0.5f, entity.zPos);
                 myEnemy.transform.rotation = new Quaternion(entity.xRot, entity.yRot, entity.zRot,0f);			
-                
-                myEnemy.GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
+//                myEnemy.GetComponentInChildren<TextMesh>().text = entity.ownerId;
+//                myEnemy.GetComponentInChildren<TextMesh>().transform.rotation = Camera.main.transform.rotation;
             };
 	    }
 	}
